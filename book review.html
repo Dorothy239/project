@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Haven</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #FFF5EE;
+            --secondary-bg: hsl(203, 30%, 26%);
+            --accent-color: #C29495;
+            --accent-dark: #856088;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: seashell;
+            color: #333;
+        }
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:  hsl(203, 30%, 26%);
+            color: var(--white);
+            padding: 15px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Philosopher', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-icon {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-icon span {
+            height: 3px;
+            width: 25px;
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background:  white;
+            color:  hsl(203, 30%, 26%);
+            margin-top: 10%;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* Featured Books */
+        .featured-books {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .featured-books h2 {
+            font-size: 30px;
+            color: #424242;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .book-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .book-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .book-card img {
+            width: 180px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .book-card h3 {
+            font-size: 20px;
+            color: #424242;
+            margin: 10px 0;
+        }
+
+        .book-card p {
+            font-size: 14px;
+            color: #757575;
+        }
+        .review-reading-container {
+            display: flex;
+            gap: 20px; 
+            justify-content: start; 
+            padding: 40px;
+        }
+
+        .latest-reviews, .featured-lists {
+            background-color:  hsl(203, 30%, 26%);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 600px; 
+            flex: 1; 
+        }
+
+        .latest-reviews h2, .featured-lists h2 {
+            font-size: 24px;
+            color: white; 
+            margin-bottom: 15px;
+        }
+
+        .review-list, .reading-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .review, .list {
+            background: #fff; 
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .review h3, .list h3 {
+            margin: 0 0 5px;
+            color: #37474F;
+            font-size: 20px;
+        }
+
+        .review p, .list p {
+            margin: 5px 0;
+            color: #424242;
+            font-size: 16px;
+        }
+
+        .review span {
+            font-size: 18px;
+            color: #d32f2f; 
+        }
+        @media (max-width: 768px) {
+       .review-reading-container {
+            flex-direction: column;
+        }
+        }
+        /* Newsletter Styles */
+        .newsletter {
+            background-color: hsl(203, 30%, 26%);
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .newsletter input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .newsletter button {
+            background-color: gray;
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #37474F;
+            color: white;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">
+            📖 Book Haven
+        </a>
+        <div class="mobile-menu-icon" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="#">Home</a>
+            <a href="book_list.html">Book Search</a>
+            <a href="aboutus.html">About</a>
+            <a href="#">icon</a> <!--login icon should be here-->
+        </div>
+    </nav>
+    
+    <div class="hero">
+        <h1>Discover Your Next Favorite Book</h1>
+        <p>Find reviews, ratings, and recommendations for the best books in every genre.</p>
+    </div>
+    <div class="featured-books">
+        <h2>Trending Books</h2>
+        <div class="book-grid">
+            <div class="book-card">
+                <img src="wildfire.jpg" alt="Wildfire">
+                <h3>Wildfire</h3>
+                <p>Author: Hannah Grace</p>
+                <p>⭐ 4.5/5</p>
+            </div>
+            <div class="book-card">
+                <img src="novel.jpg" alt="Me Before You">
+                <h3>Me Before You</h3>
+                <p>Author: Jojo Moyes/p>
+                <p>⭐ 4.2/5</p>
+            </div>
+            <div class="book-card">
+                <img src="hunger games.jpg" alt="Hunger Games">
+                <h3>The hunger games:Mockingjay</h3>
+                <p>Author: Suzanne Collins</p>
+                <p>⭐ 4.8/5</p>
+            </div>
+            <div class="book-card">
+                <img src="after.jpg" alt="After">
+                <h3>After</h3>
+                <p>Author: Anna Todd</p>
+                <p>⭐ 4.7/5</p>
+            </div>
+        </div>
+        <div class="review-reading-container">
+            <section class="latest-reviews">
+                <h2>Latest Reviews</h2>
+                <div class="review-list">
+                    <div class="review">
+                        <h3>Book Title</h3>
+                        <p>“This book was a thrilling read! Highly recommend.”</p>
+                        <span>★★★★★</span>
+                    </div>
+                    <div class="review">
+                        <h3>Book Title</h3>
+                        <p>“A bit slow at first but picked up towards the end.”</p>
+                        <span>★★★★☆</span>
+                    </div>
+                </div>
+            </section>
+            <section class="featured-lists">
+                <h2>Featured Reading Lists</h2>
+                <div class="reading-list">
+                    <div class="list">
+                        <h3>Top Fantasy Reads</h3>
+                        <p>Curated by Book Haven</p>
+                    </div>
+                    <div class="list">
+                        <h3>Best Mystery Books</h3>
+                        <p>Handpicked for you</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+    </div>
+    <footer>
+        <section class="newsletter">
+            <h2>Stay Updated with Book Haven</h2>
+            <p>Subscribe to our newsletter for book recommendations and updates!</p>
+            <form id="newsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+        <p>&copy; 2025 Book Haven. All rights reserved.</p>
+    </footer>
+    <script>
+         // Mobile Menu Toggle
+         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navbarLinks = document.getElementById('navbarLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active');
+        });
+        // Newsletter Validation
+        document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById("newsletterEmail");
+            const emailError = document.getElementById("emailError");
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(emailInput.value)) {
+                alert("Thank you for subscribing!");
+                emailInput.value = '';
+                emailError.style.display = 'none';
+            } else {
+                emailError.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>

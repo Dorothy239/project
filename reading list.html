@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading List</title>
+    <link rel="stylesheet" href="rstyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+        <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">
+            📖 Book Haven
+        </a>
+        <div class="mobile-menu-icon" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="book review.html">Home</a>
+            <a href="book_list.html">Book Search</a>
+            <a href="aboutus.html">About</a>
+            <a href="#">icon</a> <!--login icon should be here-->
+        </div>
+    </nav>
+
+
+    <main>
+        <form id="new-list-form" class="hidden">
+            <h2>Create Reading List</h2>
+            <label for="list-title">Title:</label>
+            <input type="text" id="list-title" name="title" required>
+            <label for="list-description">Description:</label>
+            <textarea id="list-description" name="description" rows="4" required></textarea>
+            <label>Privacy:</label><br>
+            <input type="radio" id="public-list" name="privacy" value="public" checked>
+            <label for="public-list">Public</label>
+            <input type="radio" id="private-list" name="privacy" value="private">
+            <label for="private-list">Private</label><br>
+            <button type="submit">Create List</button>
+            <p id="error-message" class="error-message"></p>
+        </form>
+
+        <div id="reading-lists-container">
+            </div>
+    </main>
+
+    <div id="list-detail-container" class="hidden">
+        <h3>Reading List Title</h3>
+        <p>Reading List Description</p>
+        <p>Privacy: <span id="privacy-setting"></span></p>
+        <ul id="book-list">
+            </ul>
+        <div class="actions" id="list-detail-actions">
+            <button id="share-list">Share List</button>
+            <button id="manage-list" class="hidden">Manage List</button>
+            <button id="delete-list" class="delete">Delete List</button>
+        </div>
+    </div>
+    <footer>
+        <section class="newsletter">
+            <h2>Stay Updated with Book Haven</h2>
+            <p>Subscribe to our newsletter for book recommendations and updates!</p>
+            <form id="newsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+    </footer>
+<script src="rscript.js"></script>
+</body>
+</html>

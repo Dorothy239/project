@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background: hsl(20, 43%, 93%);
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header-wrapper header{
+    width: 100%;
+    background: url("https://img.freepik.com/free-vector/beautiful-book-club-pattern-illustration_23-2149330102.jpg") no-repeat 50% 20% / cover;
+    min-height: calc(100px + 15vw);
+}
+
+.header-wrapper .cols-container .left-col{
+    padding: 25px 20px;
+    text-align: center;
+    max-width: 350px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.header-wrapper .cols-container .left-col .img-container{
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header-wrapper .cols-container .left-col .img-container img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+}
+
+.header-wrapper .cols-container .left-col.img-container span{
+    position: absolute;
+    background: hsl(203, 30%, 26%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    bottom: 3px;
+    right: 11px;
+    border: 2px solid #fff;
+}
+
+.header-wrapper .cols-container .left-col h2{
+    margin-top: 60px;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.header-wrapper .cols-container .left-col p{
+    font-size: 0.9rem;
+    color: hsl(203, 30%, 26%);
+    margin: 0;
+}
+
+.header-wrapper .cols-container .left-col .about{
+    justify-content: space-evenly;
+    position: relative;
+    margin: 35px 0;
+}
+
+.header-wrapper .cols-container .left-col .about li{
+    display: flex;
+    flex-direction: column;
+    color: hsl(203, 30%, 26%);
+    font-size: 0.9rem;
+}
+
+.header-wrapper .cols-container .left-col .about li span{
+    color: hsl(203, 30%, 26%);
+    font-weight: 600;
+}
+
+.header-wrapper .cols-container .left-col .about::after{
+    position: absolute;
+    content: "";
+    bottom: -16px;
+    display: block;
+    background: hsl(203, 30%, 26%);
+    height: 1px;
+    width: 100%;
+}
+
+.header-wrapper .cols-container ul{
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.header-wrapper .cols-container .right-col nav ul{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.header-wrapper .cols-container .left-col button {
+    background: hsl(203, 30%, 26%);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.header-wrapper .left-top button{
+    background: hsl(0, 0%, 100%);
+    border: none;
+    color: hsl(203, 30%, 26%);
+    padding: 7px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    margin-left: 70%;
+}
+
+.header-wrapper.left-top button img{
+    display: inline-flex;
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    font-size: 24px;
+    margin: 0 8%;
+}
+
+.header-wrapper .cols-container .right-col nav ul{
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.header-wrapper .cols-container .right-col nav ul{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}

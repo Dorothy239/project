@@ -1,0 +1,103 @@
+*{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: all 500ms ease;
+    background: hsl(20, 43%, 93%);
+}
+
+.row{
+    background-color: hsl(20, 43%, 93%);
+    color: hsl(203, 30%, 26%);
+    text-align: center;
+    padding: 40px;
+    width: 40%;
+    margin: auto;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.row h1{
+    font-size: 2.5em;
+}
+
+.row .inputbox{
+    margin: 0.5em 0;
+}
+
+.row .inputbox label{
+    display: block;
+    color: hsl(203, 30%, 26%);
+    text-align: left;
+    font-weight: 600;
+}
+
+.row .inputbox input, .row .inputbox button{
+    display: block;
+    padding: 0.5em 0;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid hsl(203, 30%, 26%);
+    color: hsl(203, 30%, 26%);
+}
+
+.row .inputbox input:focus, .row .inputbox button:focus{
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 1em 0.5em;
+    animation: pulse 1s infinite ease;
+}
+
+.row .inputbox button{
+    border: 1px solid #fff;
+    border-radius: 5px;
+    outline: none;
+    -moz-user-select: none;
+    user-select: none;
+    color: hsl(0, 0%, 100%);
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 2em;
+    padding: 1em;
+    background: hsl(203, 62%, 23%);
+}
+
+.row .inputbox button:hover, .row .inputbox button:focus{
+    background-color: hsl(203, 44%, 39%);
+}
+
+.row .inputbox button.is-loading::after{
+    animation: spinner 500ms infinite linear;
+    content: '';
+    position: absolute;
+    margin-left: 2em;
+    border: 2px solid #000;
+    border-radius: 100%;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    height: 1em;
+    width: 4%;
+}
+
+@media screen and (max-width: 320px){
+    .row{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .row h1{
+        font-size: 1.5em !important;
+    }
+}
+
+@media screen and (min-width: 900px){
+    .row{
+        width: 50%;
+    }
+    
+}

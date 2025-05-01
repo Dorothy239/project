@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta charset="UTF-8" content="ie=edge">
+<meta http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="login.css">
+    </head> 
+    <body>
+
+        <div class="container">
+            <div class="form-box">
+                <form action="">
+                    <h1>Login</h1>
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" required>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAb1JREFUSEvN1k3ITUEYB/DfK18lJcmOhCyUKCs7lGJhQcpGoXyUlJ0US5LsUD42rFCilLKwYMVCCYWVfKWUkgUbCTN1jt6ue95nzts5XbOd5/x/M819Zu6YEY2xEbkmA0/BNiyvFv0SN/C7zSbawmtwBcsGkFfYiceleBt4Pe5iekP4d2zAoxK8FJ6F95gbhH7AUvyI8FJ4Ly5FYdV8Pv+bUW0pfAH7o7Bq/jQOR7Wl8EXsi8Kq+fM4ENWWwkdxPAqr5o/gVFRbCueefRGFVb28JLXWm6i2FM45l7ErCDyDQxGa59vAM6obanNDcF7YHvzqGq4XugNbxvX0J1zD7RKwrmmz4za5Ye1/Dy/A1nQjrUiPxKLUWlMHtvQz/fDepiN4hlv4GG052vFKnMSmKGhg/k51e+VXa+iYCM431TlMa4nW5fmh2J2e0KvDvm+Ct+P6JMHxn+XW2oh7g1nD4Plppe8wswM4R3zBQuT3+u8YBp/FwY7QOuZYOrITEfw5ne28juEnWD0RvBivO0bruNn41nRz5T9zD3uCc2s+b4LX4n5P8Do8aILnYFVP8FN8bYJ7Mv+Nja7M3hYyMvgPElg8H/XErXYAAAAASUVORK5CYII="/>
+                    </div>
+                       <div class="input-box">
+                        <input type="password" placeholder="Password" required>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAWpJREFUSEvt1j9LHkEQx/GPELCwsAqKYBAFsdVop5AU2ukLCIG0YqFgIShWAcugVpIyhLyAgBACgqIpBbGzUFAQIkGwsUjjn+dki3Bmvb1H4QG57fZm5vfdmZsdtkmDVlODuOoBv0A/XodD72IPV2WSKAPOfOcxh9Yc5AIfsZIKLwP+ivcFwsuYTYGngt/hWxA8CeLbYf8Gn/Aq7EexUQRPBR+hG1lJe3GeE26vVeMQLfiFkacA9wTRTGsRSxHR7PsCrkMPXD4ET8l4GDtBZBzrEcGJWrd/D7YhZN0eXSng7B9uBoW32IqopfrdhVfgf6s4gDH04UMwfMFxpNRdOb8D/AxT7V5IrNQzZaZQwdWZxOe8Twz8By+L7mKi/RSdqeCbRNFUt3sJxjKuwKkljflVpY6OzKq5nn9znaHtsWmG+N/oSB2Z01h9IvBULYm1VHDmN4jsxdhc5wH+4gf2/xef8gKpk/twWMPAt+OeQh8W8oqIAAAAAElFTkSuQmCC"/>
+                    </div>
+                    <div class="forgot-link">
+                        <a href="forgot.html">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <p>or login with social platforms</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkRJREFUSEvl1snLjlEYx/HPa45kZUhhZaNYGEMWFooMURKxIMPKvOEfsGBjKIVMxcKGhSIpVoYFIaQMKUOGopAhMp1T96un03nu57yvxZvcy/v8zvW9rnOuc36nTRd9bV3E9U+BY7KDMQzf8ATvOrpypRX3wkrMw1T0T0DPcA4ncLEkiRLwTOzDiJKAuIPFuFenbwVeU0Fb6VLGx2ormm5BXcBlOFZYZaPsO+bjTGcqnojL6JGZ/DUEvoVreIsxWFDpfoQlXhT+nWqVcK7i7qGJblQB00p2YBs+J4EHYimelkDj3Bx4eWikI0ngWOV43G1VSel4Dnwac5MAa7G3NGiJLgXHZX6Pfg2TY4cOwM+SgKWaFDwSD5LJZ0Mjzc4EjMmU3libsKsxRgoeh+sJZAtiU6VfR8C7Q5Ib68CjcTshbMCeDDhemx8Kl3Zn0G6uAw/ByyTY0WAEK/6y4q3YXgeOY68q92nX3cTYDDg24rTM/1GZE7CkMpA/8txxOl5dBu2iX4hGcb5wWQ9gdYM2zh+EN60qnp6xtti9kzIdn+Yyo7LHbg0DV0PSU1JhM5O4gsmJ+Eu4m9cF1zmUqbxnZYXRPvsm4wtxshQcr8dL6J2BRHN4iOfog+FVkvFVkn7xaE7IbVGdLcZOPly4rznZ66opX3QUHPWxSfY3MZO6nB6Fi2gO7jcTlbwsZuEghhZWH1dpPT7V6UvAcX587K2qXCv32HsczvSF6oYrss5ScHoEG5+3sdHSh0HLxekMuGXQEsH/B/4N9xBeH8WBoaEAAAAASUVORK5CYII="/></a>
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAfpJREFUSEvt1kuoT1EUx/HPjYEkz0J5RUlKDDDxyiOSMhDJQJEyUEhRBmJgQCkJkamJt4wkE4WBxESGTChJmUh5F2fVvv/uPd1z9/73v/lP7q7dGey1f9+91l57rdOjS6OnS1zD4P8W+aEI9ThcxjLMwA+cw2l8S55MSd9PvZ7VwaNxBXvwp8D9aXiK2QPYfsB1LMBYLO9rUwdvrQzv4B62F8DvY1PmgG+wMUXjcZPHB3AhLT7Hzmq+bRBeghcFUXlXRXEqtuBBE3gVWqfCT5zARXyvQQ7ifAH4c3Lg4WChHoWvGFkTjCS5i2vVyV/hI47jZAH4THXoo3W7gbJ6X8rSwTS/IObMAvAxnMqBd2NhlVyLsLZAtMQkNK/mwBvQ7y5KlDM28b6f5cBxt5HFs4YAGBJxHRPwNweO9ZXpHU8aAvhN7BhIp6lkRkU6jL0Y08EBVteeZ0uqCbwf27C4A/BLLG06dBN4Pl5jRAfersOjdsFhvxk3EI2j3XEWRwbblGuLkxFhX4MVhfQnWI9fnYCjnUWSHUqtLceOCO3KQUOkr8cTU8WKZj4vzahe8Q5zI95rlMZLOcPe9XqoI5Ojrs4tFPiNWykqrb+Lkr1NdxyeRoOPP4vpmIPx1X1Hi4v5PhWZ26k6lbD62eSSq23B0g3D4NJIdWzXtVD/A1e4TB/sCCruAAAAAElFTkSuQmCC"/></a>
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAoxJREFUSEvl1kvozmkUwPHPXxaKGixcEkLTUGhk4X6NzcitWFiZmCkLCzaIsXFJuWXBgkgpq5mNy2ws3K8lZhrkWpSQSxILG/I7+v319uv3/N73nVf9lWfzvj2/c873Oec5l6dNB622DuL65sF98SM61YnQB9zH03qRrPK4D7ZhFnrUM1T4/hp/Y1XqECnw3MzDwxm4a5PAovg7LMLx4ocycO9M+A5+aBHarv4KPyF+v6wy8AEsaQH6AJ0xsMbGfvxeBQ6FuJ9u/xP8D0bluv9heP7/LbrjY7vdoscD8KgONDzairsI+bGYj0jGWvB1/FxjqxdepMCjcbUCvBo7EGVTuyIfYn8p7uE9RhRkwvubKfAUnE6Al2MPhmYGFmJiLncOf+YJuRMrE/oRmSsp8EycKFG8kIMiO3djRkEmdOJgcU3/5ocrmhmPS82CF+MQ1mUZuynh0VpswUb8USIzARebBUdYw+voRr8kwEcRjWdBHvqi2GTEtXxexayehpMlhqfjVN6BooWWrSNZVs+rAE/FmRQ4PgaguJZhb5ata/JwloEj46PMNiPCXlyTstw43yw4sjGycnDWCHZhdsFqeLsiS7CXuI1+JeBxuJwCx6nOJkLZXk6D8nCOyeXC2F94iH3F1lhjK3rEtRR4ZF4OCbYI5/ba1pcL1jaQlG40lBspcEymZynNfD8mV5RN1Gy0zKjPOVkOxGOhakX4n6TAsf84cUd17FZ+foOeVUMitNdnT5wNrVBKdGPU/la7XzaPYzTeyt9YX4Mf3g5p5CEQsP7ZXI0SaZ+trRwgHhUHiwaqHntd8mn0awOvy6LdGPjHENOqtDwbeVdHpg9r0uW4qudVOo2Am2Q2Jv79gT8BaMhxHzndaXwAAAAASUVORK5CYII="/></a>
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAX1JREFUSEvt1rFLVlEYx/HPCw4hNBi0CA0pLo4F1lCSglNjmyAIDYUhOCQJEYmDhA42hPYHCG21uEiJUVuQtDVoTdaogg61iPfIDS4PqSDn5RX1bPd3zn2+5/ec5zz31jRo1BrEdeLAg7iMJazUIyv/c/wZtyqwAcznhkfwA7wOkO/orDf4eQEYD5AdXKw3+DY+Bcgb9NcbnOI/xBha8Q73kVxnHSfuOh3X3SV04BfWDwsSHV/Fz/DCLB6V2mNMh/kWdCMV5rXK3DYWkW7KRtxEDvAIXh7ibg1d2KyuyQH+gwtHnM1TTOYGp3i7+IHfZdqjodR2r+cGJ8epxX4tA9/BezRVQGljzfj7T8uR6lcYDqlewN2gpWpP570/coDv4W2AzCAVXXXcwJec4L4i1R8C5BkmgtaDjweB28oiqb4zh6FSGC3OaioE7MVy0J4Ulf7iHHye6moNnL3iSs3+ZrgG6du6WmpX0B7mvxXNYitoR647NX8gwfjBjw1zvAfOjXIfeRRb7AAAAABJRU5ErkJggg=="/></a>
+                    </div>
+                </form>
+            </div>
+            <div class="form-box signup">
+                <form action="">
+                    <h1>Sign-up</h1>
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" required>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAb1JREFUSEvN1k3ITUEYB/DfK18lJcmOhCyUKCs7lGJhQcpGoXyUlJ0US5LsUD42rFCilLKwYMVCCYWVfKWUkgUbCTN1jt6ue95nzts5XbOd5/x/M819Zu6YEY2xEbkmA0/BNiyvFv0SN/C7zSbawmtwBcsGkFfYiceleBt4Pe5iekP4d2zAoxK8FJ6F95gbhH7AUvyI8FJ4Ly5FYdV8Pv+bUW0pfAH7o7Bq/jQOR7Wl8EXsi8Kq+fM4ENWWwkdxPAqr5o/gVFRbCueefRGFVb28JLXWm6i2FM45l7ErCDyDQxGa59vAM6obanNDcF7YHvzqGq4XugNbxvX0J1zD7RKwrmmz4za5Ye1/Dy/A1nQjrUiPxKLUWlMHtvQz/fDepiN4hlv4GG052vFKnMSmKGhg/k51e+VXa+iYCM431TlMa4nW5fmh2J2e0KvDvm+Ct+P6JMHxn+XW2oh7g1nD4Plppe8wswM4R3zBQuT3+u8YBp/FwY7QOuZYOrITEfw5ne28juEnWD0RvBivO0bruNn41nRz5T9zD3uCc2s+b4LX4n5P8Do8aILnYFVP8FN8bYJ7Mv+Nja7M3hYyMvgPElg8H/XErXYAAAAASUVORK5CYII="/>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" placeholder="Email" required>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAa9JREFUSEvtlj8oRXEUxz9PSmKxWFgU2chEmWws2CySTRZKkpB/IUmKRTbJYsNAJpNiEpsoC4vFQlLCPa9z6/Trve6fd3nKe3V7t3PP7/s559zfueeXIk+/VJ64FMC/Vnm31JPAIFCVcASPwCaw6OtacAdwlDDQlWsHTsRowZLtgnq+AmUJBWG1hLHkgmc8w6zCaoBdoDVH+BnQC9yrzpzPsBlbsNjlGtYISyMG8AZMAOvAl14ikREs2QrcrUStZt8cEn6hWd4Zf4GHAu8DA8CTLigCRoF5oCRLAO/ANLDq/X+qTyWwBXSHBYvfMzACbBtQPbAHNDrwK6AHuDH2fmDNK3eFsQWW2uqeAn3AgxqLgXHNTkxShWXgQ59XAztAW4bKRALL+hdPeArYMBulQYWvzb4Y0pYsz/I6IoN9nXPN/tYRrtMsWwI2YGyw6MomEoEVhYxpN2TbdDaWnMC+0KXeNIVss1DtFEErkmsiGUciRunjOMJBa/5WxnYsBkUe97l8C9KHATudOoGDuIoh13UBhy5YBoF80OUk8hNHn2MdPOkBUjjehnxVubv9v1J/AzG/WB9938PnAAAAAElFTkSuQmCC"/>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" required>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAWpJREFUSEvt1j9LHkEQx/GPELCwsAqKYBAFsdVop5AU2ukLCIG0YqFgIShWAcugVpIyhLyAgBACgqIpBbGzUFAQIkGwsUjjn+dki3Bmvb1H4QG57fZm5vfdmZsdtkmDVlODuOoBv0A/XodD72IPV2WSKAPOfOcxh9Yc5AIfsZIKLwP+ivcFwsuYTYGngt/hWxA8CeLbYf8Gn/Aq7EexUQRPBR+hG1lJe3GeE26vVeMQLfiFkacA9wTRTGsRSxHR7PsCrkMPXD4ET8l4GDtBZBzrEcGJWrd/D7YhZN0eXSng7B9uBoW32IqopfrdhVfgf6s4gDH04UMwfMFxpNRdOb8D/AxT7V5IrNQzZaZQwdWZxOe8Twz8By+L7mKi/RSdqeCbRNFUt3sJxjKuwKkljflVpY6OzKq5nn9znaHtsWmG+N/oSB2Z01h9IvBULYm1VHDmN4jsxdhc5wH+4gf2/xef8gKpk/twWMPAt+OeQh8W8oqIAAAAAElFTkSuQmCC"/>
+                    </div>
+                    <button type="submit" class="btn">Sign-up</button>
+                    <p>or signup with social platforms</p>
+                    <div class="social-icons">
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkRJREFUSEvl1snLjlEYx/HPa45kZUhhZaNYGEMWFooMURKxIMPKvOEfsGBjKIVMxcKGhSIpVoYFIaQMKUOGopAhMp1T96un03nu57yvxZvcy/v8zvW9rnOuc36nTRd9bV3E9U+BY7KDMQzf8ATvOrpypRX3wkrMw1T0T0DPcA4ncLEkiRLwTOzDiJKAuIPFuFenbwVeU0Fb6VLGx2ormm5BXcBlOFZYZaPsO+bjTGcqnojL6JGZ/DUEvoVreIsxWFDpfoQlXhT+nWqVcK7i7qGJblQB00p2YBs+J4EHYimelkDj3Bx4eWikI0ngWOV43G1VSel4Dnwac5MAa7G3NGiJLgXHZX6Pfg2TY4cOwM+SgKWaFDwSD5LJZ0Mjzc4EjMmU3libsKsxRgoeh+sJZAtiU6VfR8C7Q5Ib68CjcTshbMCeDDhemx8Kl3Zn0G6uAw/ByyTY0WAEK/6y4q3YXgeOY68q92nX3cTYDDg24rTM/1GZE7CkMpA/8txxOl5dBu2iX4hGcb5wWQ9gdYM2zh+EN60qnp6xtti9kzIdn+Yyo7LHbg0DV0PSU1JhM5O4gsmJ+Eu4m9cF1zmUqbxnZYXRPvsm4wtxshQcr8dL6J2BRHN4iOfog+FVkvFVkn7xaE7IbVGdLcZOPly4rznZ66opX3QUHPWxSfY3MZO6nB6Fi2gO7jcTlbwsZuEghhZWH1dpPT7V6UvAcX587K2qXCv32HsczvSF6oYrss5ScHoEG5+3sdHSh0HLxekMuGXQEsH/B/4N9xBeH8WBoaEAAAAASUVORK5CYII="/></a>
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAfpJREFUSEvt1kuoT1EUx/HPjYEkz0J5RUlKDDDxyiOSMhDJQJEyUEhRBmJgQCkJkamJt4wkE4WBxESGTChJmUh5F2fVvv/uPd1z9/73v/lP7q7dGey1f9+91l57rdOjS6OnS1zD4P8W+aEI9ThcxjLMwA+cw2l8S55MSd9PvZ7VwaNxBXvwp8D9aXiK2QPYfsB1LMBYLO9rUwdvrQzv4B62F8DvY1PmgG+wMUXjcZPHB3AhLT7Hzmq+bRBeghcFUXlXRXEqtuBBE3gVWqfCT5zARXyvQQ7ifAH4c3Lg4WChHoWvGFkTjCS5i2vVyV/hI47jZAH4THXoo3W7gbJ6X8rSwTS/IObMAvAxnMqBd2NhlVyLsLZAtMQkNK/mwBvQ7y5KlDM28b6f5cBxt5HFs4YAGBJxHRPwNweO9ZXpHU8aAvhN7BhIp6lkRkU6jL0Y08EBVteeZ0uqCbwf27C4A/BLLG06dBN4Pl5jRAfersOjdsFhvxk3EI2j3XEWRwbblGuLkxFhX4MVhfQnWI9fnYCjnUWSHUqtLceOCO3KQUOkr8cTU8WKZj4vzahe8Q5zI95rlMZLOcPe9XqoI5Ojrs4tFPiNWykqrb+Lkr1NdxyeRoOPP4vpmIPx1X1Hi4v5PhWZ26k6lbD62eSSq23B0g3D4NJIdWzXtVD/A1e4TB/sCCruAAAAAElFTkSuQmCC"/></a>
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAoxJREFUSEvl1kvozmkUwPHPXxaKGixcEkLTUGhk4X6NzcitWFiZmCkLCzaIsXFJuWXBgkgpq5mNy2ws3K8lZhrkWpSQSxILG/I7+v319uv3/N73nVf9lWfzvj2/c873Oec5l6dNB622DuL65sF98SM61YnQB9zH03qRrPK4D7ZhFnrUM1T4/hp/Y1XqECnw3MzDwxm4a5PAovg7LMLx4ocycO9M+A5+aBHarv4KPyF+v6wy8AEsaQH6AJ0xsMbGfvxeBQ6FuJ9u/xP8D0bluv9heP7/LbrjY7vdoscD8KgONDzairsI+bGYj0jGWvB1/FxjqxdepMCjcbUCvBo7EGVTuyIfYn8p7uE9RhRkwvubKfAUnE6Al2MPhmYGFmJiLncOf+YJuRMrE/oRmSsp8EycKFG8kIMiO3djRkEmdOJgcU3/5ocrmhmPS82CF+MQ1mUZuynh0VpswUb8USIzARebBUdYw+voRr8kwEcRjWdBHvqi2GTEtXxexayehpMlhqfjVN6BooWWrSNZVs+rAE/FmRQ4PgaguJZhb5ata/JwloEj46PMNiPCXlyTstw43yw4sjGycnDWCHZhdsFqeLsiS7CXuI1+JeBxuJwCx6nOJkLZXk6D8nCOyeXC2F94iH3F1lhjK3rEtRR4ZF4OCbYI5/ba1pcL1jaQlG40lBspcEymZynNfD8mV5RN1Gy0zKjPOVkOxGOhakX4n6TAsf84cUd17FZ+foOeVUMitNdnT5wNrVBKdGPU/la7XzaPYzTeyt9YX4Mf3g5p5CEQsP7ZXI0SaZ+trRwgHhUHiwaqHntd8mn0awOvy6LdGPjHENOqtDwbeVdHpg9r0uW4qudVOo2Am2Q2Jv79gT8BaMhxHzndaXwAAAAASUVORK5CYII="/></a>
+                        <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAX1JREFUSEvt1rFLVlEYx/HPCw4hNBi0CA0pLo4F1lCSglNjmyAIDYUhOCQJEYmDhA42hPYHCG21uEiJUVuQtDVoTdaogg61iPfIDS4PqSDn5RX1bPd3zn2+5/ec5zz31jRo1BrEdeLAg7iMJazUIyv/c/wZtyqwAcznhkfwA7wOkO/orDf4eQEYD5AdXKw3+DY+Bcgb9NcbnOI/xBha8Q73kVxnHSfuOh3X3SV04BfWDwsSHV/Fz/DCLB6V2mNMh/kWdCMV5rXK3DYWkW7KRtxEDvAIXh7ibg1d2KyuyQH+gwtHnM1TTOYGp3i7+IHfZdqjodR2r+cGJ8epxX4tA9/BezRVQGljzfj7T8uR6lcYDqlewN2gpWpP570/coDv4W2AzCAVXXXcwJec4L4i1R8C5BkmgtaDjweB28oiqb4zh6FSGC3OaioE7MVy0J4Ulf7iHHye6moNnL3iSs3+ZrgG6du6WmpX0B7mvxXNYitoR647NX8gwfjBjw1zvAfOjXIfeRRb7AAAAABJRU5ErkJggg=="/></a>
+                    </div>
+                </form>
+            </div>
+            <div class="toggle-box">
+                <div class="toggle-panel toggle-left">
+                    <h1>Hello, Welcome to Book Haven!</h1>
+                    <p>Don't have an account?</p>
+                    <button class="btn register-btn">Sign-up</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Welcome Back!</h1>
+                    <p>Already have an account?</p>
+                    <button class="btn login-btn">Login</button>
+                </div>
+            </div>
+        </div>
+    
+        <script src="script.js"></script>
+           </body>
+</html>

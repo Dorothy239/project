@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Book Haven</title>
+    <link rel="stylesheet" href="styles311.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">
+            📖 Book Haven
+        </a>
+        <div class="mobile-menu-icon" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="book review.html">Home</a>
+            <a href="book_list.html">Book Search</a>
+            <a href="aboutus.html">About</a>
+            <a href="#">icon</a> <!--login icon should be here-->
+        </div>
+    </nav>
+
+    <section class="about-us">
+        <h1>About Us</h1>
+        <img class="r" src="r.jpg" alt="Reading makes me feel">
+        <br>
+        <hr>
+        <h2>Our Mission</h2>
+        <p>At Book Haven, our mission is to create a vibrant, supportive, and inclusive community for book lovers around the world. We aim to empower readers to share their thoughts, insights, and recommendations on books, fostering a space where literature thrives and diverse voices are heard.</p>
+
+        <p>We believe that books are not just sources of knowledge and entertainment—they are catalysts for meaningful conversations, connections, and growth. Our platform is designed to help users discover new books, express their opinions, and engage in thoughtful discussions, all while promoting a love for reading and learning.</p>
+
+        <p>Whether you're an avid reader, a casual book enthusiast, or a first-time reviewer, our goal is to provide the tools and resources you need to share your voice and enrich the global literary community.</p>
+<hr>
+<br>
+        <h2>Meet Our Team</h2>
+        <p>Our team is a passionate group of book lovers, tech enthusiasts, and community builders dedicated to bringing people together through the power of reading. Here's a little bit about each of us:</p>
+    
+    <div class="team-member">
+        <h4>Dorothy Davou - Co-Founder & CEO</h4>
+        <p>Dorothy is a lifelong book lover and technology enthusiast with a background in software development. With over a decade of experience in building digital communities, Dorothy's vision is to create a platform where readers from all walks of life can connect and share their love of books.</p>
+        <img src="d.jpg" alt="Dorothy Davou" />
+    </div>
+    
+    <div class="team-member">
+        <h4>Jenny Rotimi - Co-Founder & CTO</h4>
+        <p>Jane is a developer with a passion for creating user-friendly, engaging platforms. Her technical expertise drives the development of the BookReviewHub app, ensuring that it’s fast, secure, and accessible to everyone, no matter their technical background.</p>
+        <img src="j.jpg" alt="Jenny Rotimi" />
+    </div>
+    
+    <div class="team-member">
+        <h4>Amaka Okeke - Community Manager</h4>
+        <p>Amaka is our dedicated community manager, working to ensure that Book Haven remains a positive, welcoming space for everyone. With a background in social media management and user engagement, Amaka thrives on bringing readers together and fostering meaningful conversations.</p>
+        <img src="a.jpg" alt="Amaka Okeke" />
+    </div>
+    
+    <div class="team-member">
+        <h4>Winifred Okemini - Content Strategist</h4>
+        <p>Winifred is the heart and soul behind our content strategy. She works to ensure that our blog, social media, and newsletters are full of interesting and relevant content for the Book Haven community, from book recommendations to reading tips and trends.</p>
+        <img src="w.jpg" alt="Winifred Okemini" />
+    </div>
+
+    <div class="team-member">
+        <h4>Tamara Kuku - Marketing Lead</h4>
+        <p>Tamara brings a wealth of experience in digital marketing and brand development. She works tirelessly to promote the Book Haven platform and its values, building strong relationships with authors, publishers, and book communities to help our platform grow and reach new audiences.</p>
+        <img src="t.jpg" alt="Tamara Kuku" />
+    </div>
+
+        <p>We are committed to building a community where book lovers can share their thoughts and experiences.</p>
+    </section>
+    <footer>
+        <section class="newsletter">
+            <h2>Stay Updated with Book Haven</h2>
+            <p>Subscribe to our newsletter for book recommendations and updates!</p>
+            <form id="newsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+        <p>&copy; 2025 Book Haven. All rights reserved.</p>
+        <div class="flinks">
+            <h5>COMPANY</h5>
+            <a href = "aboutus.html">About Us</a>
+            <a href = "terms.html;.html">Terms and Conditions</a>
+            <a href = "privacy.html">Privacy Policy</a>
+            <a href = "reports.html">Report a problem</a>
+        </div>
+        <div class="social-icons">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/yourprofile" target="_blank" >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/yourprofile" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@yourprofile" target="_blank">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            </div>
+    </footer>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navbarLinks = document.getElementById('navbarLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active');
+        });
+        // Newsletter Validation
+        document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById("newsletterEmail");
+            const emailError = document.getElementById("emailError");
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(emailInput.value)) {
+                alert("Thank you for subscribing!");
+                emailInput.value = '';
+                emailError.style.display = 'none';
+            } else {
+                emailError.style.display = 'block';
+            }
+        });
+        // Newsletter Validation
+        document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById("newsletterEmail");
+            const emailError = document.getElementById("emailError");
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(emailInput.value)) {
+                alert("Thank you for subscribing!");
+                emailInput.value = '';
+                emailError.style.display = 'none';
+            } else {
+                emailError.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

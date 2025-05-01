@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="forgot.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="row">
+        <h1>Forgot Password</h1>
+        <h6>Enter email to reset password.</h6>
+        <div class="inputbox">
+            <input type="email" name="user-email"  id="user-email">
+            <p><label for="username">Email</label></p>
+           
+        </div>
+        <div class="inputbox">
+            <input type="password" name="Password"  id="password">
+            <p><label for="pass">New Password</label></p>
+        </div>
+        <div class="inputbox">
+            <input type="password" name="confirm"  id="confirm">
+            <p><label for="conf">Confirm Password</label></p>
+            <button onclick="showSpinner()">Reset Password</button>
+        </div>
+    </div>
+</body>
+</html>

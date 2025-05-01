@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reports - Book Haven</title>
+    <link rel="stylesheet" href="styles311.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">
+            📖 Book Haven
+        </a>
+        <div class="mobile-menu-icon" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="#">Home</a>
+            <a href="book_list.html">Book Search</a>
+            <a href="aboutus.html">About</a>
+            <a href="#">icon</a> <!--login icon should be here-->
+        </div>
+    </nav>  
+    <section class="reports">
+        <h1 style="padding-top: 5%;">User Reports</h1>
+        <h2>Report an Issue</h2>
+        <form id="reportForm">
+            <label for="issueType">Issue Type:</label>
+            <div class="custom-dropdown-container">
+                <div id="selected-option" class="selected">Select an Option</div>
+                <div id="dropdown" class="custom-dropdown">
+                    <div class="dropdown-item" data-value="Book Issue">Book Issue</div>
+                    <div class="dropdown-item" data-value="Review Issue">Review Issue</div>
+                    <div class="dropdown-item" data-value="Other">Other</div>
+                </div>
+            </div>
+<br>
+            <label for="details">Details:</label>
+            <textarea id="reportTextArea" rows="4" placeholder="Provide a detailed description of the issue..."></textarea>
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
+    <footer>
+        <div class="flinks">
+            <h5>COMPANY</h5>
+            <a href = "aboutus.html">About Us</a>
+            <a href = "terms.html;.html">Terms and Conditions</a>
+            <a href = "privacy.html">Privacy Policy</a>
+            <a href = "reports.html">Report a problem</a>
+        </div>
+        <div class="social-icons">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/yourprofile" target="_blank" >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/yourprofile" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@yourprofile" target="_blank">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            </div>
+        <p class="copyright">&copy; 2025 Book Haven</p>
+    </footer>
+
+    <script>
+         // Mobile Menu Toggle
+         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navbarLinks = document.getElementById('navbarLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active');
+        });
+// Get elements
+const dropdown = document.getElementById("dropdown");
+        const selectedOption = document.getElementById("selected-option");
+
+        // Toggle dropdown visibility on clicking selected option
+        selectedOption.addEventListener("click", function() {
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        });
+
+        // Set selected option and close dropdown
+        const items = document.querySelectorAll(".dropdown-item");
+        items.forEach(item => {
+            item.addEventListener("click", function() {
+                selectedOption.textContent = this.textContent;
+                dropdown.style.display = "none";  // Close dropdown after selecting an option
+            });
+        });
+
+        // Close dropdown if user clicks outside
+        window.addEventListener("click", function(event) {
+            if (!event.target.closest(".custom-dropdown-container")) {
+                dropdown.style.display = "none";
+            }
+        });
+
+        document.getElementById("reportForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from being submitted
+    
+    // Get the text area element
+    var textArea = document.getElementById("reportTextArea");
+    
+    // Check if the text area is empty
+    if (textArea.value.trim() === "") {
+        // If empty, show an alert asking the user to fill in the details
+        alert("Please fill in the details before submitting.");
+    } else {
+        // If not empty, show the confirmation alert
+        alert("Report Submitted! Thank you for helping us improve.");
+    }
+});
+
+    </script>
+</body>
+</html>

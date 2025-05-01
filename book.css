@@ -1,0 +1,112 @@
+body {
+    font-family: 'Georgia', serif;
+    background-color: #fdf3e7;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+nav {
+    background-color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #37474F;
+}
+
+.search-bar {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #37474F;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #d32f2f;
+}
+
+.hero {
+    background-image: url('novel.jpg');
+    background-size: cover;
+    background-position: center;
+    color: black;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero-content h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: hsl(203, 30%, 26%);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #b71c1c;
+}
+
+/* Trending Books */
+.trending-books, .latest-reviews, .featured-lists {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.trending-books h2, .latest-reviews h2, .featured-lists h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.carousel {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.book {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 200px;
+}
+.carousel .book img {
+    width: 180px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

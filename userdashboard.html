@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard | Book Reviews</title>
+  <link rel="stylesheet" href="ustyle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  
+<body>
+  <div class="container">
+    <aside id="quick-links">
+      <ul>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </aside>
+    <main>
+      <h1 id="welcomeMsg"></h1>
+      <section id="feed" class="section">
+        <h2> Activity</h2>
+        <div class="items-container">
+          <!-- Feed items will be injected here -->
+        </div>
+      </section>
+      <div class="two-col">
+        <section id="myReviews" class="section">
+          <h2>My Reviews</h2>
+          <div class="items-container">
+            <!-- User's reviews will be injected here -->
+          </div>
+        </section>
+        <section id="readingLists" class="section">
+          <h2>My Reading Lists <button id="addListBtn">+ New List</button></h2>
+          <ul class="items-container">
+            <!-- Reading lists will be injected here -->
+          </ul>
+        </section>
+      </div>
+      <section id="notifications" class="section">
+        <h2>Notifications</h2>
+        <ul class="items-container">
+          <!-- Notifications will be injected here -->
+        </ul>
+      </section>
+    </main>
+  </div>
+  <!-- Modal for creating new list -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h3>Create New List</h3>
+      <input type="text" id="newListName" placeholder="List Name">
+      <button id="createListBtn">Create</button>
+    </div>
+  </div>
+  
+  <footer>
+    <section class="newsletter">
+        <h2>Stay Updated with Book Haven</h2>
+        <p>Subscribe to our newsletter for book recommendations and updates!</p>
+        <form id="newsletterForm">
+            <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+</footer>
+  <script src="uscript.js"></script>
+</body>
+</html>
+
