@@ -351,6 +351,121 @@
             color: white;
             text-align: center;
         }
+        .isbn-scanner-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 2000;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* Video container with visual indicator */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 15px 0;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #222;
+}
+
+/* Ensure video is visible and properly sized */
+.isbn-scanner-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Add scanning overlay guide */
+.scanning-guide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 100px;
+    border: 2px dashed #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.scanning-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: red;
+    top: 50%;
+    left: 0;
+    animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+    0% { top: 20%; }
+    50% { top: 80%; }
+    100% { top: 20%; }
+}
+
+.isbn-scanner-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.isbn-scanner-controls button {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.isbn-scanner-controls button:hover {
+    background-color: var(--accent-dark);
+}
+
+#scanOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1999;
+    display: none;
+}
+
+#scanResult {
+    margin-top: 10px;
+    font-weight: 500;
+    min-height: 24px;
+    color: var(--secondary-bg);
+}
+
+#scanIsbnBtn {
+    background-color: var(--accent-dark);
+    color: var(--white);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
     </style>
 </head>
 <body>
@@ -390,6 +505,8 @@
                 </select>
                 <input type="text" id="queryInput" placeholder="Enter your search term" required>
                 <button id="searchButton" type="submit">Search</button>
+                <!-- Add this button after the search button in the search form -->
+<button id="scanIsbnBtn" type="button">Scan ISBN</button>
             </form>
             
             <div class="results" id="results"></div>
@@ -420,7 +537,25 @@
     <div class="book-details" id="bookDetails" style="display:none;">
         <!-- Book details and reviews will be dynamically populated here -->
     </div>
-
+    
+<div id="scanOverlay"></div>
+<div class="isbn-scanner-container" id="isbnScannerContainer">
+    <h2>ISBN Scanner</h2>
+    <p>Position barcode in the highlighted area</p>
+    
+    <div class="video-container">
+        <video id="videoFeed" playsinline autoplay></video>
+        <div class="scanning-guide">
+            <div class="scanning-line"></div>
+        </div>
+    </div>
+    
+    <div class="isbn-scanner-controls">
+        <button id="startScanBtn">Start Camera</button>
+        <button id="closeScanBtn">Close</button>
+    </div>
+    <p id="scanResult">Press Start Camera to begin</p>
+</div>
     
 
     <script>
@@ -814,6 +949,187 @@
                 closeBookDetails();
             }
         });
+
+        // Initialize Quagga Scanner with proper video display
+function initializeScanner() {
+    const videoFeed = document.getElementById('videoFeed');
+    const scanResult = document.getElementById('scanResult');
+    scanResult.textContent = 'Accessing camera...';
+    
+    // First make sure any previous instance is stopped
+    if (typeof Quagga !== 'undefined' && Quagga.initialized) {
+        Quagga.stop();
+    }
+    
+    // Make sure video element is visible before initializing
+    videoFeed.style.display = 'block';
+    videoFeed.style.height = '300px';
+    
+    // Request direct camera access first to ensure we can see the feed
+    navigator.mediaDevices.getUserMedia({ 
+        video: { 
+            facingMode: "environment",
+            width: { ideal: 640 },
+            height: { ideal: 480 }
+        } 
+    })
+    .then(function(stream) {
+        // Attach the stream directly to show it's working
+        videoFeed.srcObject = stream;
+        videoFeed.onloadedmetadata = function(e) {
+            videoFeed.play();
+            scanResult.textContent = "Camera active! You should see the video feed now.";
+            
+           
+        };
+    })
+    .catch(function(err) {
+        console.error("Error accessing camera:", err);
+        scanResult.textContent = "Camera access error: " + err.message;
+    });
+    
+    // Function to initialize Quagga after confirming camera works
+    function initializeQuagga() {
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: videoFeed,
+                constraints: {
+                    width: 1280,
+                    height: 720,
+                    facingMode: "environment" // Use back camera if available
+                },
+                area: { // Define scan area
+                    top: "30%",    
+                    right: "30%",  
+                    left: "30%",   
+                    bottom: "30%"  
+                },
+            },
+            locator: {
+                patchSize: "medium",
+                halfSample: true
+            },
+            frequency: 10,
+            decoder: {
+                readers: [
+                    "ean_reader", 
+                    "ean_8_reader",
+                    "code_128_reader", // Adding more readers for better detection
+                    "code_39_reader",
+                    "upc_reader",
+                    "isbn_reader"  // Ensures ISBN detection specifically
+                ]
+            },
+            locate: true
+        }, function(err) {
+            if (err) {
+                console.error("Quagga initialization error:", err);
+                scanResult.textContent = "Scanner error: " + err.message;
+                return;
+            }
+            
+            scanResult.textContent = "Scanner active. Point at barcode.";
+            console.log("Quagga initialized successfully");
+            Quagga.start();
+        });
+
+        // Handle successful barcode detection
+        Quagga.onDetected(function(result) {
+            const isbn = result.codeResult.code;
+            scanResult.textContent = "Found: " + isbn;
+            console.log("Detected code:", isbn);
+            
+            // Play a success sound
+            const beep = new Audio('data:audio/wav;base64,//uQRAAAAWMSLwUIYAAsYkXgoQwAEaYLWfkWgAI0wWs/ItAAAGDgYtAgAyN+QWaAAihwMWm4G8QQRDiMcCBcH3Cc+CDv/7xA4Tvh9Rz/y8QADBwMWgQAZG/ILNAARQ4GLTcDeIIIhxGOBAuD7hOfBB3/94gcJ3w+o5/5eIAIAAAVwWgQAVQ2ORaIQwEMAJiDg95G4nQL7mQVWI6GwRcfsZAcsKkJvxgxEjzFUgfHoSQ9Qq7KNwqHwuB13MA4a1q/DmBrHgPcmjiGoh//EwC5nGPEmS4RcfkVKOhJf+WOgoxJclFz3kgn//dBA+ya1GhurNn8zb//9NNutNuhz31f////9vt///z+IdAEAAAK4LQIAKobHItEIYCGAExBwe8jcToF9zIKrEdDYIuP2MgOWFSE34wYiR5iqQPj0JIeoVdlG4VD4XA67mAcNa1fhzA1jwHuTRxDUQ//iYBczjHiTJcIuPyKlHQkv/LHQUYkuSi57yQT//uggfZNajQ3Vm///ezyNwACAACuBlEAVKoBLzBi8HYwkCbdp77+0SCi/uVlMnYZcH3PXvHyQHYF8K5QYlKfayPsBKSML0OiVYyY0AAAAbSURBVHicY/jPwMBQD8T//v0DiJ8AYKcMAOl+SkMAAAAASUVORK5CYII=');
+            beep.play();
+            
+            // Add a short delay before closing to show the result
+            setTimeout(() => {
+                // Stop scanner and perform book search
+                document.getElementById('queryType').value = 'isbn';
+                document.getElementById('queryInput').value = isbn;
+                setTimeout(() => Quagga.stop(), 500)
+                
+                // Trigger the search
+                document.getElementById('searchButton').click();
+                
+                // Close scanner
+                closeScanner();
+            }, 1000);
+        });
+        
+        // Draw scanning area
+        Quagga.onProcessed(function(result) {
+            var drawingCtx = Quagga.canvas.ctx.overlay,
+                drawingCanvas = Quagga.canvas.dom.overlay;
+
+            if (result) {
+                if (result.boxes) {
+                    drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                    result.boxes.filter(function (box) {
+                        return box !== result.box;
+                    }).forEach(function (box) {
+                        Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "green", lineWidth: 2});
+                    });
+                }
+
+                if (result.box) {
+                    Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: "blue", lineWidth: 2});
+                }
+
+                if (result.codeResult && result.codeResult.code) {
+                    Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
+                }
+            }
+        });
+    }
+}
+// Get scanner-related elements
+const scannerContainer = document.getElementById('isbnScannerContainer');
+const scanOverlay = document.getElementById('scanOverlay');
+const startScanBtn = document.getElementById('startScanBtn');
+const closeScanBtn = document.getElementById('closeScanBtn');
+const scanIsbnBtn = document.getElementById('scanIsbnBtn');
+
+// Open scanner when scan button is clicked
+scanIsbnBtn.addEventListener('click', function() {
+    scannerContainer.style.display = 'block';
+    scanOverlay.style.display = 'block';
+});
+
+// Start camera when start button is clicked
+startScanBtn.addEventListener('click', function() {
+    initializeScanner();
+});
+
+// Close scanner when close button is clicked
+closeScanBtn.addEventListener('click', function() {
+    closeScanner();
+});
+
+// Function to close scanner
+function closeScanner() {
+    // Stop Quagga if it's running
+    if (typeof Quagga !== 'undefined' && Quagga.initialized) {
+        Quagga.stop();
+    }
+    
+    // Close the video stream if it exists
+    const videoFeed = document.getElementById('videoFeed');
+    if (videoFeed.srcObject) {
+        videoFeed.srcObject.getTracks().forEach(track => track.stop());
+        videoFeed.srcObject = null;
+    }
+    
+    // Hide the scanner UI
+    scannerContainer.style.display = 'none';
+    scanOverlay.style.display = 'none';
+    
+    // Reset result text
+    document.getElementById('scanResult').textContent = 'Press Start Camera to begin';
+}
     </script>
 </body>
 </html>
