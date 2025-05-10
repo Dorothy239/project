@@ -569,10 +569,28 @@
 
         // Populate Genre Filters
         const genreFilter = document.getElementById('genreFilter');
+        
+        // Add "All" button first
+        const allButton = document.createElement('button');
+        allButton.textContent = 'All';
+        allButton.dataset.genre = 'all';
+        allButton.classList.add('active'); // Set as default active
+        allButton.addEventListener('click', () => {
+            // Remove active class from all buttons
+            genreFilter.querySelectorAll('button').forEach(btn => 
+                btn.classList.remove('active'));
+            allButton.classList.add('active');
+            
+            // Filter results based on genre
+            filterResultsByGenre('all');
+        });
+        genreFilter.appendChild(allButton);
+        
+        // Add other genre buttons
         GENRES.forEach(genre => {
             const button = document.createElement('button');
             button.textContent = genre;
-            button.dataset.genre = genre.toLowerCase().replace(' ', '-');
+            button.dataset.genre = genre.toLowerCase().replace(/\s+/g, '-');
             button.addEventListener('click', () => {
                 // Remove active class from all buttons
                 genreFilter.querySelectorAll('button').forEach(btn => 
@@ -596,76 +614,199 @@
             let apiUrl;
             switch(queryType) {
                 case 'title':
-                    apiUrl = `https://openlibrary.org/search.json?title=${encodeURIComponent(queryValue)}`;
+                    apiUrl = `https://openlibrary.org/search.json?title=${encodeURIComponent(queryValue)}&limit=20`;
                     break;
                 case 'author':
-                    apiUrl = `https://openlibrary.org/search.json?q=author:${encodeURIComponent(queryValue)}`;
+                    apiUrl = `https://openlibrary.org/search.json?author=${encodeURIComponent(queryValue)}&limit=20`;
                     break;
                 case 'isbn':
-                    apiUrl = `https://openlibrary.org/search.json?isbn=${encodeURIComponent(queryValue)}`;
+                    apiUrl = `https://openlibrary.org/search.json?isbn=${encodeURIComponent(queryValue)}&limit=20`;
                     break;
                 default:
-                    apiUrl = `https://openlibrary.org/search.json?title=${encodeURIComponent(queryValue)}`;
+                    apiUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(queryValue)}&limit=20`;
             }
 
+            console.log(`Searching with URL: ${apiUrl}`);
+            document.getElementById("results").innerHTML = "<p>Searching...</p>";
+
             fetch(apiUrl)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    console.log(`Search returned ${data.docs.length} results`);
+                    
                     // Filter and enrich book data
                     totalBooks = data.docs
-                        .filter(book => 
-                            book.title && 
-                            book.author_name && 
-                            book.cover_i // Ensure we have a cover
-                        )
-                        .map(book => ({
-                            ...book,
-                            genre: determineGenre(book),
-                            coverUrl: `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-                        }));
+                        .filter(book => {
+                            const hasRequiredFields = book.title && book.author_name;
+                            if (!hasRequiredFields) {
+                                console.log("Filtering out book missing required fields:", book.title || "Unknown");
+                            }
+                            return hasRequiredFields;
+                        })
+                        .map(book => {
+                            // Create a proper cover URL that works even if cover_i is missing
+                            let coverUrl = book.cover_i 
+                                ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+                                : 'https://openlibrary.org/images/icons/avatar_book-sm.png'; // Fallback image
+                            
+                            const genre = determineGenre(book);
+                            
+                            return {
+                                ...book,
+                                genre: genre,
+                                coverUrl: coverUrl
+                            };
+                        });
 
+                    // Reset to show all books after search
                     filteredBooks = totalBooks;
+                    
+                    // Reset active genre filter to "All"
+                    document.querySelectorAll('#genreFilter button').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.dataset.genre === 'all') {
+                            btn.classList.add('active');
+                        }
+                    });
+                    
+                    // Generate genre distribution stats
+                    const genreCounts = {};
+                    totalBooks.forEach(book => {
+                        genreCounts[book.genre] = (genreCounts[book.genre] || 0) + 1;
+                    });
+                    console.log("Genre distribution:", genreCounts);
+                    
                     displayResults();
                 })
                 .catch(error => {
                     console.error('Search error:', error);
-                    document.getElementById("results").innerHTML = "<p>Error fetching book details.</p>";
+                    document.getElementById("results").innerHTML = 
+                        `<p>Error fetching book details: ${error.message}</p>`;
                 });
         }
 
         // Determine Genre Based on Book Metadata
         function determineGenre(book) {
+            // Log books for debugging
+            console.log("Determining genre for book:", book.title);
+            
             // Simple genre detection based on subject or keywords
             const subjectLower = (book.subject || []).map(s => s.toLowerCase());
+            const subjectStr = subjectLower.join(' '); // Join for easier searching
+            
+            // Add subject_facet if available
+            const subjectFacets = (book.subject_facet || []).map(s => s.toLowerCase());
+            
+            // Improved genre mappings to match our GENRES array
             const genreMappings = {
-                'mystery': ['detective', 'crime', 'mystery'],
-                'science fiction': ['sci-fi', 'space', 'future', 'technology'],
-                'fantasy': ['magic', 'dragon', 'fantasy', 'mythical'],
-                'romance': ['love', 'relationship', 'romance'],
-                'historical fiction': ['history', 'historical', 'period'],
-                'thriller': ['suspense', 'tension', 'thriller'],
-                'non-fiction': ['biography', 'history', 'science', 'philosophy']
+                'fiction': ['fiction', 'novel', 'story'],
+                'non-fiction': ['non-fiction', 'nonfiction', 'autobiography'],
+                'mystery': ['detective', 'crime', 'mystery', 'murder'],
+                'science fiction': ['sci-fi', 'science fiction', 'space', 'future', 'alien'],
+                'fantasy': ['magic', 'dragon', 'fantasy', 'mythical', 'supernatural'],
+                'romance': ['love', 'relationship', 'romance', 'romantic'],
+                'thriller': ['suspense', 'tension', 'thriller', 'horror'],
+                'historical fiction': ['historical fiction', 'period fiction'],
+                'biography': ['biography', 'biographical', 'memoir'],
+                'poetry': ['poem', 'poetry', 'verse', 'lyric'],
+                'science': ['science', 'physics', 'biology', 'chemistry', 'mathematics'],
+                'self-help': ['self-help', 'personal development', 'motivation']
             };
 
+            // Create a scoring system for genre matching
+            let genreScores = {};
+            
+            // Initialize scores for all genres
+            for (const genre of Object.keys(genreMappings)) {
+                genreScores[genre] = 0;
+            }
+            
+            // Score based on subjects
             for (const [genre, keywords] of Object.entries(genreMappings)) {
-                if (keywords.some(keyword => 
-                    subjectLower.some(subject => subject.includes(keyword))
-                )) {
-                    return genre;
+                for (const keyword of keywords) {
+                    // Check in subject arrays
+                    if (subjectLower.some(subject => subject.includes(keyword))) {
+                        genreScores[genre] += 2; // Higher score for subject match
+                    }
+                    
+                    // Check in subject_facet arrays
+                    if (subjectFacets.some(facet => facet.includes(keyword))) {
+                        genreScores[genre] += 2;
+                    }
+                    
+                    // Check in subject string
+                    if (subjectStr.includes(keyword)) {
+                        genreScores[genre] += 1;
+                    }
                 }
             }
-            return 'fiction'; // Default genre
+            
+            // Check title for genre hints
+            const titleLower = book.title.toLowerCase();
+            for (const [genre, keywords] of Object.entries(genreMappings)) {
+                for (const keyword of keywords) {
+                    if (titleLower.includes(keyword)) {
+                        genreScores[genre] += 1; // Lower score for title match
+                    }
+                }
+            }
+            
+            // Get the genre with the highest score
+            let bestMatch = 'fiction'; // Default
+            let highestScore = 0;
+            
+            for (const [genre, score] of Object.entries(genreScores)) {
+                if (score > highestScore) {
+                    highestScore = score;
+                    bestMatch = genre;
+                }
+            }
+            
+            // Check if book has directly specified genres in subject/subject_key
+            const directGenreMatch = GENRES.find(genre => 
+                subjectLower.includes(genre.toLowerCase()) || 
+                subjectFacets.includes(genre.toLowerCase())
+            );
+            
+            if (directGenreMatch) {
+                return directGenreMatch.toLowerCase();
+            }
+            
+            console.log(`Genre determined for "${book.title}": ${bestMatch}`);
+            return bestMatch;
         }
 
         // Filter Results by Genre
         function filterResultsByGenre(genre) {
+            console.log(`Filtering by genre: ${genre}`);
+            
             if (genre === 'all') {
                 filteredBooks = totalBooks;
+                console.log(`Showing all books: ${totalBooks.length}`);
             } else {
-                filteredBooks = totalBooks.filter(book => 
-                    book.genre.toLowerCase() === genre
-                );
+                // Normalize the genre string format for comparison
+                const normalizedGenre = genre.replace(/-/g, ' ');
+                console.log(`Normalized genre: ${normalizedGenre}`);
+                
+                // Debug: Show all book genres before filtering
+                console.log("Available book genres:", totalBooks.map(book => book.genre));
+                
+                filteredBooks = totalBooks.filter(book => {
+                    const match = book.genre.toLowerCase() === normalizedGenre;
+                    if (match) {
+                        console.log(`Match found: "${book.title}" - ${book.genre}`);
+                    }
+                    return match;
+                });
+                
+                console.log(`Found ${filteredBooks.length} books matching genre: ${normalizedGenre}`);
             }
+            
             currentPage = 1;
             displayResults();
         }
@@ -695,7 +836,7 @@
                         <div>
                             <h4>${book.title}</h4>
                             <p><strong>Author:</strong> ${book.author_name.join(', ')}</p>
-                            <p><strong>Genre:</strong> ${book.genre}</p>
+                            <p><strong>Genre:</strong> ${book.genre.charAt(0).toUpperCase() + book.genre.slice(1)}</p>
                             <p><strong>Year:</strong> ${book.first_publish_year || 'N/A'}</p>
                         </div>
                     `;
@@ -705,9 +846,9 @@
                 // Update pagination buttons
                 prevButton.disabled = currentPage === 1;
                 nextButton.disabled = endIndex >= filteredBooks.length;
-                pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredBooks.length / RESULTS_PER_PAGE)}`;
+                pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredBooks.length / RESULTS_PER_PAGE) || 1}`;
             } else {
-                resultsDiv.innerHTML = "<p>No books found.</p>";
+                resultsDiv.innerHTML = "<p>No books found matching this genre filter.</p>";
                 prevButton.disabled = true;
                 nextButton.disabled = true;
                 pageInfo.textContent = "Page 1 of 1";
